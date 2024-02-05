@@ -1,10 +1,13 @@
-import os, smtplib, ssl
+import os
+import smtplib
+import ssl
 from configparser import ConfigParser
 from email import encoders
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.utils import formatdate
+
 
 def send(subject, body_text, file_to_attach):
     
@@ -27,7 +30,7 @@ def send(subject, body_text, file_to_attach):
     msg["Date"] = formatdate(localtime=True)
     
     if body_text:
-        msg.attach( MIMEText(body_text) )
+        msg.attach(MIMEText(body_text))
 
     msg["To"] = to_addr
     
@@ -36,14 +39,13 @@ def send(subject, body_text, file_to_attach):
     with open(file_to_attach, "rb") as fh:
         data = fh.read()
         
-    attachment.set_payload( data )
+    attachment.set_payload(data)
     encoders.encode_base64(attachment)
     attachment.add_header(*header)
     msg.attach(attachment)
 
-    server = smtplib.SMTP(host, 587)
+    server = smtplib.SMTP_SSL(host, 465)
     server.ehlo()
-    server.starttls(context=ssl.create_default_context())
     server.login(login, password)
     server.sendmail(from_addr, to_addr, msg.as_string())
     server.quit()
