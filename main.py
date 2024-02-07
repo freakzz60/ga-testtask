@@ -18,8 +18,8 @@ clickelement.click("/html/body/div[3]/div[3]/div/div/div[1]/div[1]/div/div[2]/di
 # Индикативные курсы
 tablehandle.handle()
 initwebdriver.driver.close()
-print('Тестовое задание', f"Добрый день. Высылаю Excel-файл, содержащий {tableops.countrows()} {wordcase.correctcase()}"
-      , tablehandle.filename)
+print('Тестовое задание', f"Добрый день. Высылаю Excel-файл, содержащий {tableops.countrows()}"
+                          f"{wordcase.correctcase()}", tablehandle.filename)
 mail.send('Тестовое задание', f"Добрый день. Высылаю Excel-файл, содержащий {tableops.countrows()} "
                               f"{wordcase.correctcase()}", tablehandle.filename)
 os.remove(tablehandle.filename)
