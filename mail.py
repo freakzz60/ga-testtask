@@ -18,6 +18,7 @@ def send(subject, body_text, file_to_attach):
     cfg.read(config_path)
     
     host = cfg.get("smtp", "server")
+    port = cfg.get("smtp", "port")
     login = cfg.get('smtp', 'login')
     password = cfg.get('smtp', 'password')
     from_addr = cfg.get("smtp", "from_addr")
@@ -43,7 +44,7 @@ def send(subject, body_text, file_to_attach):
     attachment.add_header(*header)
     msg.attach(attachment)
 
-    server = smtplib.SMTP_SSL(host, 465)
+    server = smtplib.SMTP_SSL(host, int(port))
     server.ehlo()
     server.login(login, password)
     server.sendmail(from_addr, to_addr, msg.as_string())

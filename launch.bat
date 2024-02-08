@@ -1,1 +1,1 @@
-python .\main.py
+[pathtovenv]\python .\main.py
