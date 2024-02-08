@@ -17,13 +17,13 @@ def maketable(filename, firsttable, secondtable):
     # Отформатировать таблицу в соответствии с заданием
 
 
-def calcresult(filename):
+def calcresult(filename):  # Поделить USD/RUB на JPY/RUB
     df = pd.read_excel(filename)
     df['Результат'] = df['Курс USD/RUB'] / df['Курс JPY/RUB']
     df.to_excel(filename, index=False)
 
 
-def formatting(filename):
+def formatting(filename):  # Отформатировать таблицу
     wb = oxl.load_workbook(filename=filename)
     ws = wb.active
     column_letters = tuple(oxl.utils.get_column_letter(col_number + 1) for col_number in range(ws.max_column))
@@ -37,7 +37,7 @@ def formatting(filename):
     wb.close()
 
 
-def countrows(filename):
+def countrows(filename):  # Посчитать строки
     wb = oxl.load_workbook(filename=filename)
     ws = wb.active
     rowsnum = str(ws.max_row - 1)

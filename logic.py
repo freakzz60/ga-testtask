@@ -70,13 +70,13 @@ def makemagic(filename):
     # Убрать за собой
 
 
-def cleanobsoletefiles():
+def cleanobsoletefiles():  # Удалить старые выгрузки, если остались
     for deletecandidate in os.listdir("."):
         if deletecandidate.endswith("xlsx"):
             os.remove(deletecandidate)
 
 
-def correctcase(rowsnum):
+def correctcase(rowsnum):  # Подобрать склонение
     if rowsnum[-1] in ('0', '5', '6', '7', '8', '9') or rowsnum in ('11', '12', '13', '14'):
         return 'строк данных'
     elif rowsnum[-1] in ('2', '3', '4') and rowsnum not in ('12', '13', '14'):
